@@ -4,6 +4,10 @@ const getProjects = () => {
   return Project.find()
 }
 
+const getProjectById = _id => {
+  return Project.findOne({ _id })
+}
+
 const createProject = props => {
   const project = new Project(props)
   return project.save()
@@ -19,6 +23,7 @@ const removeProject = _id => {
 
 module.exports = {
   getProjects,
+  getProjectById,
   createProject,
   updateProject,
   removeProject
