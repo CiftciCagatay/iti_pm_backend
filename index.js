@@ -22,7 +22,6 @@ app.use('/', bodyParser.json())
 app.use('/', cors())
 
 app.use('/auth', authRoute)
-app.use('/users', usersRoute)
 
 // Authorization: Token check
 app.use('/', (req, res, next) => {
@@ -40,6 +39,7 @@ app.use('/', (req, res, next) => {
 })
 
 // Routes
+app.use('/users', usersRoute)
 app.use('/projects', projectsRoute)
 app.use('/events', eventsRoute)
 app.use('/tasks', tasksRoute)
