@@ -1,4 +1,4 @@
-require('dotenv').config();
+require('dotenv').config()
 
 const express = require('express')
 const bodyParser = require('body-parser')
@@ -13,6 +13,7 @@ const usersRoute = require('./src/components/user/api')
 const projectsRoute = require('./src/components/project/api')
 const eventsRoute = require('./src/components/event/api')
 const labelsRoute = require('./src/components/label/api')
+const costsRoute = require('./src/components/cost/api')
 const tasksRoute = require('./src/components/task/api')
 const taskStatusesRoute = require('./src/components/task-status/api')
 
@@ -30,6 +31,19 @@ app.use('/', (req, res, next) => {
   jwt
     .verify(token)
     .then(payload => {
+      if (!payload) {
+        res.status(401).send()
+        return
+      }
+
+      const { _id, name } = payload
+
+      if (!_id || !name) {
+        res.status(401).send()
+        return
+      }
+
+      res.locals.user = { _id, name }
       next()
     })
     .catch(err => {
@@ -45,6 +59,7 @@ app.use('/events', eventsRoute)
 app.use('/tasks', tasksRoute)
 app.use('/taskStatuses', taskStatusesRoute)
 app.use('/labels', labelsRoute)
+app.use('/costs', costsRoute)
 
 mongoDB
   .connect()

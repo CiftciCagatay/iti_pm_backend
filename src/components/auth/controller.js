@@ -19,7 +19,7 @@ module.exports.signInWithEmailAndPassword = (req, res) => {
 
       return user.generateJWT()
     })
-    .then(token => res.status(200).json({ token }))
+    .then(token => res.status(200).json({ token, name: user.name, _id: user._id }))
     .catch(err => {
       console.log(err)
       res.status(401).send()

@@ -1,7 +1,7 @@
 const Label = require('./model')
 
 const getLabels = projectId => {
-  return Label.find({ projectId })
+  return Label.find({ projectId }).sort({ name: 1 })
 }
 
 const createLabel = props => {

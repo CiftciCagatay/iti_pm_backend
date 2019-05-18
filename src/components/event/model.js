@@ -19,7 +19,10 @@ const EventSchema = new mongoose.Schema({
   user: User,
 
   users: [User],
-  labels: [Label]
+  labels: [Label],
+  statusId: String,
+
+  payload: Object
 })
 
 module.exports = mongoose.model('Event', EventSchema)

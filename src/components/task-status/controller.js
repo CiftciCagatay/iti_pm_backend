@@ -1,10 +1,8 @@
 const repository = require('./repository')
 
 module.exports.getTaskStatuses = (req, res) => {
-  const { projectId } = req.query
-
   repository
-    .getTaskStatuses(projectId)
+    .getTaskStatuses(req.query)
     .then(result => res.status(200).json(result))
     .catch(err => {
       console.log(err)

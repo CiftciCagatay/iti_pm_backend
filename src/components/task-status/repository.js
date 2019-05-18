@@ -1,7 +1,19 @@
 const TaskStatus = require('./model')
 
-const getTaskStatuses = projectId => {
-  return TaskStatus.find({ projectId })
+const getTaskStatuses = params => {
+  let query = {}
+
+  Object.keys(params).map(key => {
+    switch (key) {
+      case 'projectId':
+        query[key] = params[key]
+        break
+      default:
+        break
+    }
+  })
+
+  return TaskStatus.find(query)
 }
 
 const createTaskStatus = props => {

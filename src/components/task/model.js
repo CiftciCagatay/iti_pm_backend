@@ -26,6 +26,9 @@ const TaskSchema = new mongoose.Schema({
     required: true
   },
 
+  createdAt: Date,
+  createdBy: User,
+
   detail: String,
   startDate: Date,
   endDate: Date,

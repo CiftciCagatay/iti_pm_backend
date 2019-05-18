@@ -3,10 +3,14 @@ const ctrl = require('./controller')
 
 const router = express.Router()
 
+router.get('/:projectId', ctrl.getProjectById)
 router.get('/', ctrl.getProjects)
-router.get('/:_id', ctrl.getProjectById)
 router.post('/', ctrl.createProject)
-router.put('/:_id', ctrl.updateProject)
-router.delete('/:_id', ctrl.removeProject)
+
+router.post('/:projectId/addMembers', ctrl.addMembers)
+router.post('/:projectId/removeMembers', ctrl.removeMembers)
+
+router.put('/:projectId', ctrl.updateProject)
+router.delete('/:projectId', ctrl.removeProject)
 
 module.exports = router

@@ -1,9 +1,28 @@
 const Task = require('./model')
 
 const getTasks = params => {
-  // TODO: build query from params
   let query = {}
-  return Task.find(query)
+
+  Object.keys(params).map(key => {
+    switch (key) {
+      case 'projectId':
+        query[key] = params[key]
+        break
+
+      case 'userId':
+        query.assignees = { $elemMatch: { _id: params[key] } }
+        break
+
+      default:
+        break
+    }
+  })
+
+  return Task.find(query).sort({ createdAt: -1 })
+}
+
+const getTask = _id => {
+  return Task.findOne({ _id })
 }
 
 const createTask = props => {
@@ -21,6 +40,7 @@ const removeTask = _id => {
 
 module.exports = {
   getTasks,
+  getTask,
   createTask,
   updateTask,
   removeTask
